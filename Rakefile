@@ -33,7 +33,7 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.rspec_opts = "-r simplecov -p"
 end
 
-task :default => [:doc_spec, :features]
+task :default => [:spec]
 
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
@@ -44,8 +44,3 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
-
-require 'git-todo'
-
-require 'cucumber/rake/task'
-Cucumber::Rake::Task.new(:features)

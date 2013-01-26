@@ -8,13 +8,9 @@ source "http://rubygems.org"
 gem "bundler"
 
 group :development do
-  gem "cucumber"
-
-  gem "git-todo", :path => "/Users/caleb/Projects/git-todo"
   gem "growl"
   gem "guard"
   gem "guard-rspec"
-  gem "guard-cucumber"
 
   gem "jeweler", "~> 1.8.3"
 
