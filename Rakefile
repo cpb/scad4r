@@ -18,8 +18,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "scad4r"
   gem.homepage = "http://github.com/cpb/scad4r"
   gem.license = "MIT"
-  gem.summary = %Q{i uh}
-  gem.description = %Q{oh uhm}
+  gem.summary = %Q{Ruby wrapper for OpenSCAD}
+  gem.description = %Q{Provides Ruby affordances for scripting OpenSCAD}
   gem.email = "me@cpb.ca"
   gem.authors = ["Caleb Buxton"]
   # dependencies defined in Gemfile
