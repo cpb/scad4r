@@ -2,6 +2,8 @@ source "http://rubygems.org"
 
 gem "bundler"
 
+gem "childprocess"
+
 group :development do
   gem "growl"
   gem "guard"

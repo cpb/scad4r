@@ -26,13 +26,13 @@ module Scad4r
         end
 
         it "returns a hash describing the result" do
-          IO.stub(:popen).and_return(StringIO.new)
+          subject.stub(:shell_out).and_return(StringIO.new)
           subject.run(passed_file).should be_a(Hash)
         end
 
         describe "result hash" do
           before do
-            IO.stub(:popen).and_return(StringIO.new)
+            subject.stub(:shell_out).and_return(StringIO.new)
           end
 
           let(:parser) {
