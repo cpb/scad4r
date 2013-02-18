@@ -1,11 +1,28 @@
 module OpenscadExecutionMatcher
   extend RSpec::Matchers::DSL
 
+  def childprocess_double
+    double("ChildProcess", start: true, wait: true,
+          io: double("IO", "stdout=" => true, "stderr=" => true))
+  end
+
+  def write_pipe_double
+    double("write pipe", close: true)
+  end
+
+  def read_pipe_double(result)
+    StringIO.new(result || "")
+  end
+
   matcher :run_openscad do |expected_openscad_command="openscad" |
     @expected_openscad_invocation = Array(expected_openscad_command)
 
     match do |openscad_runner|
-      IO.should_receive(:popen) do |arguments|
+
+      openscad_runner.stub(:pipes).and_return([
+        read_pipe_double(@mock_result),write_pipe_double])
+
+      ChildProcess.should_receive(:build) do |arguments|
         options = arguments.pop if arguments.last.is_a?(Hash)
 
         arguments.shift(@expected_openscad_invocation.length).should eql(@expected_openscad_invocation)
@@ -16,7 +33,7 @@ module OpenscadExecutionMatcher
 
         arguments.last.should eql(@expected_input_file)
 
-        StringIO.new(@mock_result||"")
+        childprocess_double
       end
     end
 

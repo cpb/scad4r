@@ -1,3 +1,5 @@
+require 'childprocess'
+
 module Scad4r
   class Runner
     class PassThrough
@@ -21,17 +23,34 @@ module Scad4r
       # provide a reasonable default
       net_options = {output: output_file(path, net_options)}.merge(net_options)
 
-      io = IO.popen(openscad_invocation(path, net_options))
+      io = shell_out(openscad_invocation(path, net_options))
 
       result_hash = parser.parse io.read
 
       result_hash.merge({output: net_options.fetch(:output)})
     end
 
+    protected
+
+    def shell_out(*cmd)
+      r, w = pipes
+      process = ChildProcess.build(*cmd)
+      process.io.stdout = process.io.stderr = w
+      process.start
+      w.close
+      process.wait # to do, stream progress
+
+      r
+    end
+
     private
 
+    def pipes
+      IO.pipe
+    end
+
     def openscad_invocation(path, options)
-      [*openscad_command(options),*runtime_arguments(path, options), err: [:child, :out]]
+      [*openscad_command(options),*runtime_arguments(path, options)]
     end
 
     def openscad_command(options)
