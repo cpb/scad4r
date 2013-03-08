@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "scad4r"
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Caleb Buxton"]
-  s.date = "2013-02-18"
+  s.date = "2013-03-08"
   s.description = "Provides Ruby affordances for scripting OpenSCAD"
   s.email = "me@cpb.ca"
   s.extra_rdoc_files = [
@@ -26,6 +26,9 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "features/runner.feature",
+    "features/step_definitions/runner_steps.rb",
+    "features/support/env.rb",
     "lib/scad4r.rb",
     "lib/scad4r/notification.rb",
     "lib/scad4r/result_parser.rb",
@@ -53,10 +56,13 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<childprocess>, ["~> 0.3"])
+      s.add_development_dependency(%q<aruba>, ["~> 0.5"])
       s.add_development_dependency(%q<growl>, ["~> 1.0"])
       s.add_development_dependency(%q<guard>, ["~> 1.6"])
+      s.add_development_dependency(%q<guard-cucumber>, ["~> 1.3"])
       s.add_development_dependency(%q<guard-rspec>, ["~> 2.3"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.3"])
+      s.add_development_dependency(%q<pry>, ["~> 0.9"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<rspec>, ["~> 2.12"])
       s.add_development_dependency(%q<rb-fsevent>, ["~> 0.9"])
@@ -64,10 +70,13 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<simplecov-csv>, ["~> 0.1"])
     else
       s.add_dependency(%q<childprocess>, ["~> 0.3"])
+      s.add_dependency(%q<aruba>, ["~> 0.5"])
       s.add_dependency(%q<growl>, ["~> 1.0"])
       s.add_dependency(%q<guard>, ["~> 1.6"])
+      s.add_dependency(%q<guard-cucumber>, ["~> 1.3"])
       s.add_dependency(%q<guard-rspec>, ["~> 2.3"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.3"])
+      s.add_dependency(%q<pry>, ["~> 0.9"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<rspec>, ["~> 2.12"])
       s.add_dependency(%q<rb-fsevent>, ["~> 0.9"])
@@ -76,10 +85,13 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<childprocess>, ["~> 0.3"])
+    s.add_dependency(%q<aruba>, ["~> 0.5"])
     s.add_dependency(%q<growl>, ["~> 1.0"])
     s.add_dependency(%q<guard>, ["~> 1.6"])
+    s.add_dependency(%q<guard-cucumber>, ["~> 1.3"])
     s.add_dependency(%q<guard-rspec>, ["~> 2.3"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.3"])
+    s.add_dependency(%q<pry>, ["~> 0.9"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<rspec>, ["~> 2.12"])
     s.add_dependency(%q<rb-fsevent>, ["~> 0.9"])
