@@ -22,7 +22,7 @@ module OpenscadExecutionMatcher
       openscad_runner.stub(:pipes).and_return([
         read_pipe_double(@mock_result),write_pipe_double])
 
-      ChildProcess.should_receive(:build) do |arguments|
+      ChildProcess.should_receive(:build) do |*arguments|
         options = arguments.pop if arguments.last.is_a?(Hash)
 
         arguments.shift(@expected_openscad_invocation.length).should eql(@expected_openscad_invocation)

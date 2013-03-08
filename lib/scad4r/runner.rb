@@ -32,7 +32,7 @@ module Scad4r
 
     protected
 
-    def shell_out(*cmd)
+    def shell_out(cmd)
       r, w = pipes
       process = ChildProcess.build(*cmd)
       process.io.stdout = process.io.stderr = w
