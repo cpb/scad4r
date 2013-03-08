@@ -55,7 +55,7 @@ module Scad4r
 
             it "runs with the option" do
               subject.should run_openscad.
-                with("-o #{passed_file.sub_ext(".csg")}").
+                with("-o#{passed_file.sub_ext(".csg")}").
                 on(passed_file)
 
               subject.run(passed_file, format: :csg)
@@ -66,7 +66,7 @@ module Scad4r
             context "format: :stl" do
               it "creates stl files" do
                 subject.should run_openscad.
-                  with("-o #{passed_file.sub_ext(".stl")}").
+                  with("-o#{passed_file.sub_ext(".stl")}").
                   on(passed_file)
 
                 subject.run(passed_file, format: :stl)
@@ -76,7 +76,7 @@ module Scad4r
             context "format: :csg" do
               it "creates csg files" do
                 subject.should run_openscad.
-                  with("-o #{passed_file.sub_ext(".csg")}").
+                  with("-o#{passed_file.sub_ext(".csg")}").
                   on(passed_file)
 
                 subject.run(passed_file, format: :csg)

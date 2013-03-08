@@ -64,7 +64,7 @@ module Scad4r
     def runtime_arguments(path, options)
       arguments = []
 
-      arguments << "-o #{options.fetch(:output)}"
+      arguments << "-o#{options.fetch(:output)}"
 
       arguments.push(*setting_constants(options.fetch(:constants)))
 
