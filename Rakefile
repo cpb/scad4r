@@ -33,7 +33,10 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.rspec_opts = "-r simplecov -p"
 end
 
-task :default => [:spec]
+require 'cucumber/rake/task'
+Cucumber::Rake::Task.new(:features)
+
+task :default => [:spec, :features]
 
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
