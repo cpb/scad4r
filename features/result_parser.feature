@@ -10,3 +10,4 @@ Feature: I want to know what openscad's done with my scad file
     """
     When I run "not_two_manifold.scad" through the Scad4r::Runner
     Then the results should be an error
+    And it should include timings

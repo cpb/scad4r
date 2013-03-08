@@ -1,21 +1,24 @@
 module Scad4r
   class ResultParser
     def parse(result)
+      parse_timings(result).merge(parse_messages(result))
+    end
+
+    protected
+    def parse_messages(result)
       case result
       when %r{Parser error in line (\d+): (.*)$}
         {error: "#{$2} line #{$1}"}
       when %r{Object isn't}
         {error: result}
       when %r{WARNING:}, %r{ECHO:}
-        extract_timings(result).merge({
-          warnings: extract_warnings(result),
-          echos: extract_echos(result)})
+        { warnings: extract_warnings(result),
+          echos: extract_echos(result)}
       else
-        extract_timings(result)
+        {}
       end
     end
 
-    protected
     def extract_warnings(result)
       find_messages(result, "WARNING")
     end
@@ -24,7 +27,7 @@ module Scad4r
       find_messages(result, "ECHO")
     end
 
-    def extract_timings(result)
+    def parse_timings(result)
       {real: extract_time(result, :real),
         user: extract_time(result, :user),
         sys: extract_time(result, :sys)
