@@ -16,6 +16,7 @@ require 'rspec/expectations'
 require 'aruba/cucumber'
 
 require 'scad4r/runner'
+require 'scad4r/result_parser'
 
 require 'pry'
 

@@ -4,6 +4,8 @@ module Scad4r
       case result
       when %r{Parser error in line (\d+): (.*)$}
         {error: "#{$2} line #{$1}"}
+      when %r{Object isn't}
+        {error: result}
       when %r{WARNING:}, %r{ECHO:}
         extract_timings(result).merge({
           warnings: extract_warnings(result),
