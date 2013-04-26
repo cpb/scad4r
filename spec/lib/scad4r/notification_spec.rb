@@ -17,6 +17,14 @@ module Scad4r
        warnings: nil,
        real: nil}
     }
+
+    context "with output path" do
+      subject { notifications.last }
+      let(:scad4r_result) { mock_result.merge(output: Pathname.new("tmp/aruba/cube.stl"), real: 0)}
+
+      its(:message) { should include("-> tmp/aruba/cube.stl")}
+    end
+
     context "with errors" do
       subject { notifications.first }
       let(:scad4r_result) { mock_result.merge(error: "error message") }
@@ -32,7 +40,7 @@ module Scad4r
       let(:scad4r_result) { mock_result.merge(real: "0m0.555s") }
 
       its(:priority) { should eql(low_priority) }
-      its(:title) { should eql("openscad SUCCESS") }
+      its(:title) { should include("SUCCESS") }
       its(:image) { should eql(:success) }
       its(:message) { should eql("0m0.555s") }
     end
@@ -42,7 +50,7 @@ module Scad4r
       let(:scad4r_result) { mock_result.merge(warnings: ["the warning message"]) }
 
       its(:priority) { should eql(medium_priority) }
-      its(:title) { should eql("openscad WARNING") }
+      its(:title) { should include("WARNING") }
       its(:image) { should eql(:error) }
       its(:message) { should eql(scad4r_result[:warnings].first) }
     end
@@ -58,7 +66,7 @@ module Scad4r
       let(:scad4r_result) { mock_result.merge(echos: ["the echo message"]) }
 
       its(:priority) { should eql(medium_priority) }
-      its(:title) { should eql("openscad ECHO") }
+      its(:title) { should include("ECHO") }
       its(:image) { should eql(:success) }
       its(:message) { should eql(scad4r_result[:echos].first) }
     end

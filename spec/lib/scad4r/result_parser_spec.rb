@@ -20,9 +20,9 @@ module Scad4r
 
       context "in geometry" do
         let(:scad_result) {
-          "Object isn't a valid 2-manifold! Mobify your design." }
+          "Object isn't a valid 2-manifold! Modify your design.\n       60.93 real        59.84 user         0.32 sys\n" }
 
-        its(:error) { should eql("Object isn't a valid 2-manifold! Mobify your design.")}
+        its(:error) { should eql("Object isn't a valid 2-manifold! Modify your design.")}
       end
     end
 

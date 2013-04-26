@@ -9,8 +9,8 @@ module Scad4r
       case result
       when %r{Parser error in line (\d+): (.*)$}
         {error: "#{$2} line #{$1}"}
-      when %r{Object isn't}
-        {error: result}
+      when /^Object isn't.+$/
+        {error: $&}
       when %r{WARNING:}, %r{ECHO:}
         { warnings: extract_warnings(result),
           echos: extract_echos(result)}
